@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm Appointment</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="main-body light-theme app sidebar-mini" style="background-color: white;">
+  <div id="loading">
+    <img src="assets/img/loader1.svg" class="loader-img" alt="Loader">
+  </div>
+
+  <div class="container-fluid mg-lg-t-90" style="text-align: center;">
+    <div style="text-align: center; color: black;">
+      <h1>Confirm Appointment</h1>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <div class="main-content-body d-flex flex-column">
+          <div class="card p-4" style="text-align:center;">
+            <ol class="breadcrumb mg-b-0">
+              <li class="breadcrumb-item active">תאריך ושעה:</li>
+              <li class="breadcrumb-item active"><%= new Date(time).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' }) %></li>
+            </ol>
+            <br>
+            <form action="/book" method="POST">
+              <input type="hidden" name="time" value="<%= time %>">
+              <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="הכנס שם" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="הכנס מייל" required>
+              </div>
+              <button type="submit" class="btn btn-outline-dark btn-block">אשר תור</button>
+            </form>
+            <br>
+            <button class="btn btn-outline-dark btn-block" onclick="window.history.back()">חזור</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</body>
+</html>
