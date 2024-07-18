@@ -67,6 +67,9 @@ app.get('/timeslots', (req, res) => {
       console.log(err);
       res.status(500).send('Error fetching appointments');
     } else {
+      // Filter out already booked slots
+      const bookedSlots = appointments.map(appointment => appointment.date.getTime());
+      const availableSlots = timeSlots.filter(slot => !bookedSlots.includes(slot.getTime()));
       res.json(availableSlots);
     }
   });
@@ -109,8 +112,7 @@ app.post('/book', (req, res) => {
   });
 });
 
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server started on portw ${PORT}`);
+  console.log(`Server started on port ${PORT}`);
 });
