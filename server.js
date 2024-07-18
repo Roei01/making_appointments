@@ -6,10 +6,10 @@ const Appointment = require('./models/appointment');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/appointments', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+const uri = "mongodb+srv://royinagar2:0ZbTAJ4T5YUkeduu@cluster0.cpfyu6i.mongodb.net/Cluster0?retryWrites=true&w=majority";
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -22,14 +22,11 @@ function generateTimeSlots(dayOffset = 0) {
   const startHour = 8;
   const endHour = 20;
   const interval = 15; // minutes
-  const now = new Date();
 
   for (let hour = startHour; hour < endHour; hour++) {
     for (let minutes = 0; minutes < 60; minutes += interval) {
       const slot = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), hour, minutes);
-      if (slot > now) { // only add future slots
-        slots.push(slot);
-      }
+      slots.push(slot);
     }
   }
 
@@ -41,24 +38,32 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: 'royinagar2@gmail.com',
     pass: 'pryk uqde apyp kuwl'
-}
+  }
 });
 
-app.get('/', (req, res) => {
+app.get('/timeslots', (req, res) => {
   const dayOffset = parseInt(req.query.day || 0);
   const timeSlots = generateTimeSlots(dayOffset);
   const selectedDate = new Date();
   selectedDate.setDate(selectedDate.getDate() + dayOffset);
   selectedDate.setHours(0, 0, 0, 0);
 
+  console.log('Selected Date:', selectedDate);
+
   Appointment.find({ date: { $gte: selectedDate, $lt: new Date(selectedDate.getTime() + 24 * 60 * 60 * 1000) } }, (err, appointments) => {
     if (err) {
       console.log(err);
+      res.status(500).send('Error fetching appointments');
     } else {
-      // Filter out the time slots that have already been booked
-      const bookedSlots = appointments.map(appointment => appointment.date.getTime());
-      const availableSlots = timeSlots.filter(slot => !bookedSlots.includes(slot.getTime()));
-      res.render('index', { timeSlots: availableSlots, dayOffset: dayOffset });
+      console.log('Appointments:', appointments);
+
+      const bookedSlots = appointments.map(appointment => appointment.date.toISOString());
+      console.log('Booked Slots:', bookedSlots);
+
+      const availableSlots = timeSlots.filter(slot => !bookedSlots.includes(slot.toISOString()));
+      console.log('Available Slots:', availableSlots);
+
+      res.json(availableSlots);
     }
   });
 });
@@ -69,6 +74,7 @@ app.get('/confirm', (req, res) => {
 });
 
 app.post('/book', (req, res) => {
+  console.log('Booking data:', req.body); // הוסף את השורה הזו כדי לבדוק מה נשלח לשרת
   const newAppointment = new Appointment({
     name: req.body.name,
     date: new Date(req.body.time),
@@ -99,6 +105,8 @@ app.post('/book', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });

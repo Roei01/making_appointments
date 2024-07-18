@@ -1,91 +1,116 @@
 body {
-    background-color: #f4f7f6;
-    font-family: 'Noto Sans Hebrew', sans-serif;
-  }
-  
-  .main-header {
-    background-color: #343a40;
-    color: white;
-    padding: 15px 0;
-  }
-  
-  .main-header a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .main-header .header-formsearch input {
-    border: 2px solid #ced4da;
-    border-radius: 50px;
-  }
-  
-  .main-header .header-formsearch button {
-    border: none;
-    background: none;
-    color: #495057;
-  }
-  
-  .main-content-body {
-    background: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    padding: 30px;
-    margin-top: 20px;
-  }
-  
-  .carousel .carousel-inner img {
-    border-radius: 8px;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .breadcrumb {
-    background: none;
-    padding: 0;
-  }
-  
-  .breadcrumb-item + .breadcrumb-item::before {
-    content: '>';
-  }
-  
-  .btn {
-    border-radius: 50px;
-    transition: all 0.3s ease;
-  }
-  
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  }
-  
-  .main-footer {
-    background-color: #343a40;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-  }
-  
-  .main-footer a {
-    color: #ffd700;
-    text-decoration: none;
-  }
-  
-  .main-footer a:hover {
-    text-decoration: underline;
-  }
-  
-  select.form-control {
-    border-radius: 50px;
-  }
-  
-  .time-slot {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-  
-  .time-slot.show {
-    display: block;
-    opacity: 1;
-  }
-  
+  background-color: #f4f7f6;
+  font-family: 'Noto Sans Hebrew', sans-serif;
+}
+
+.main-header {
+  background-color: #343a40;
+  color: white;
+  padding: 15px 0;
+}
+
+.main-header a {
+  color: white;
+  text-decoration: none;
+}
+
+.main-header .header-formsearch input {
+  border: 2px solid #ced4da;
+  border-radius: 50px;
+}
+
+.main-header .header-formsearch button {
+  border: none;
+  background: none;
+  color: #495057;
+}
+
+.main-content-body {
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 30px;
+  margin-top: 20px;
+}
+
+.carousel .carousel-inner img {
+  border-radius: 8px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.breadcrumb {
+  background: none;
+  padding: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '>';
+}
+
+.btn {
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.main-footer {
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.main-footer a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+.main-footer a:hover {
+  text-decoration: underline;
+}
+
+select.form-control {
+  border-radius: 50px;
+}
+
+.time-slot {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.time-slot.show {
+  display: block;
+  opacity: 1;
+}
+
+#timeSlots button {
+  display: inline-block;
+  width: 120px;
+  margin: 10px;
+  padding: 15px;
+  background-color: #f4f7f6; /* צבע רקע דומה לרקע האתר */
+  color: black; /* צבע טקסט שחור */
+  border: 1px solid #ced4da; /* קו גבול עדין */
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  text-align: center;
+}
+
+#timeSlots button:hover {
+  background-color: #e2e6ea; /* צבע רקע כהה יותר בעת ריחוף */
+  transform: translateY(-3px);
+}
+
+#timeSlots button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #007bff; /* צל כחול בעת פוקוס */
+}
