@@ -1,8 +1,8 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: [main]
 
 jobs:
   build:
@@ -37,7 +37,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-  publish-npm:
+  deploy:
     needs: build
     runs-on: ubuntu-latest
 
@@ -49,13 +49,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Publish to npm
-        run: npm publish
+      - name: Deploy to production
+        run: npm run deploy
         env:
           NODE_AUTH_TOKEN: ${https://api.render.com/deploy/srv-cqbt57rv2p9s738p4jj0?key=ow2quTPo-gI}
-
