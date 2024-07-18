@@ -33,6 +33,33 @@ body {
   margin-top: 20px;
 }
 
+.header-text {
+  text-align: center;
+  color: black;
+  margin-top: 20px; /* או padding-top: 20px; בהתאם לצורך */
+}
+
+.header-text h1 {
+  font-size: 4em;
+  font-weight: bold;
+  margin-top: 20px; /* מרווח נוסף מעל הכותרת */
+}
+
+
+.header-text h4 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-top: 50px; /* מרווח נוסף מעל הכותרת */
+}
+
+.header-text h5 {
+  font-size: 1.2em;
+  font-weight: normal;
+  color: gray; /* אפשר לשנות את הצבע במידת הצורך */
+  margin-top: 10px; /* מרווח נוסף מעל הכותרת */
+}
+
+
 .carousel .carousel-inner img {
   border-radius: 8px;
   height: 300px;
@@ -113,4 +140,37 @@ select.form-control {
 #timeSlots button:focus {
   outline: none;
   box-shadow: 0 0 5px #007bff; /* צל כחול בעת פוקוס */
+}
+
+
+
+/* עיצוב כללי ל-breadcrumb */
+.custom-breadcrumb {
+  background-color: #f8f9fa; /* צבע רקע מותאם */
+  border-radius: 5px; /* פינות מעוגלות */
+  padding: 10px 15px; /* רווח פנימי */
+  list-style: none; /* ביטול נקודות רשימה */
+  display: flex;
+  justify-content: center; /* מרכז את הפריטים בתוך ה-breadcrumb */
+}
+
+/* עיצוב לפריטים בתוך ה-breadcrumb */
+.custom-breadcrumb-item {
+  font-size: 2em; /* גודל טקסט */
+  color: #007bff; /* צבע טקסט מותאם */
+  margin: 0 5px; /* רווח בין הפריטים */
+}
+
+.custom-breadcrumb-item.active {
+  font-weight: bold; /* משקל טקסט מודגש לפריטים פעילים */
+}
+
+.custom-breadcrumb-item::before {
+  content: ''; /* ביטול החץ בין הפריטים */
+}
+
+.custom-breadcrumb-item + .custom-breadcrumb-item::before {
+  content: '>'; /* הוספת חץ בין הפריטים */
+  color: #6c757d; /* צבע חץ מותאם */
+  margin: 0 5px; /* רווח בין החץ לטקסט */
 }

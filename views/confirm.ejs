@@ -10,13 +10,25 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="main-body light-theme app sidebar-mini" style="background-color: white;">
-  <div id="loading">
-    <img src="assets/img/loader1.svg" class="loader-img" alt="Loader">
+  <div class="main-header">
+    <div class="container-fluid">
+      <div class="main-header-left d-flex justify-content-between align-items-center">
+        <div>
+          <a class="main-logo desktop-logo" href="#"><img src="/logo\barber2.svg" alt="logo" width="75" height="75"></a>
+        </div>
+        <div class="header-formsearch">
+          <input class="form-control" placeholder="Search" type="search">
+          <button class="btn"><i class="fe fe-search"></i></button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="container-fluid mg-lg-t-90" style="text-align: center;">
     <div style="text-align: center; color: black;">
-      <h1>Confirm Appointment</h1>
+      <div class="header-text">
+        <h4>אישור הזמנה</h4>
+      </div>
     </div>
     <br>
     <div class="row">
@@ -24,9 +36,9 @@
       <div class="col-lg-6">
         <div class="main-content-body d-flex flex-column">
           <div class="card p-4" style="text-align:center;">
-            <ol class="breadcrumb mg-b-0">
-              <li class="breadcrumb-item active">תאריך ושעה:</li>
-              <li class="breadcrumb-item active"><%= new Date(time).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' }) %></li>
+            <ol class="breadcrumb custom-breadcrumb mg-b-0">
+              <li class="breadcrumb-item custom-breadcrumb-item active">תאריך ושעה:</li>
+              <li class="breadcrumb-item custom-breadcrumb-item active"><%= new Date(time).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' }) %></li>
             </ol>
             <br>
             <form action="/book" method="POST">

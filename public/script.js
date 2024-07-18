@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         data.forEach(slot => {
           const button = document.createElement('button');
           button.className = 'btn btn-outline-dark btn-block time-slot show';
-          button.textContent = new Date(slot).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' });
+          button.textContent = new Date(slot).toLocaleString('he-IL', {timeStyle: 'short' });
           button.onclick = () => window.location.href = `/confirm?time=${slot}`;
           timeSlotsDiv.appendChild(button);
         });

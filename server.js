@@ -19,14 +19,26 @@ function generateTimeSlots(dayOffset = 0) {
   const slots = [];
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + dayOffset);
+
+  // Set the date to the start of the day in Israel time
+  const israelTime = new Date(currentDate.toLocaleString('en-US', { timeZone: 'Asia/Jerusalem' }));
+  israelTime.setHours(0, 0, 0, 0);
+
   const startHour = 8;
   const endHour = 20;
   const interval = 15; // minutes
 
+  const now = new Date();
+
   for (let hour = startHour; hour < endHour; hour++) {
     for (let minutes = 0; minutes < 60; minutes += interval) {
-      const slot = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), hour, minutes);
-      slots.push(slot);
+      const slot = new Date(israelTime);
+      slot.setHours(hour, minutes);
+
+      // Only add future slots
+      if (slot > now) {
+        slots.push(slot);
+      }
     }
   }
 
