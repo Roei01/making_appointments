@@ -67,14 +67,6 @@ app.get('/timeslots', (req, res) => {
       console.log(err);
       res.status(500).send('Error fetching appointments');
     } else {
-      console.log('Appointments:', appointments);
-
-      const bookedSlots = appointments.map(appointment => appointment.date.toISOString());
-      console.log('Booked Slots:', bookedSlots);
-
-      const availableSlots = timeSlots.filter(slot => !bookedSlots.includes(slot.toISOString()));
-      console.log('Available Slots:', availableSlots);
-
       res.json(availableSlots);
     }
   });
