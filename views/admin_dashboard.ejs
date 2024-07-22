@@ -6,7 +6,95 @@
   <title>Admin Dashboard - הזמנות עתידיות</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-  <link rel="stylesheet" href="/admin_styles.css">
+  <link rel="stylesheet" href="/public/admin_styles.css">
+  <style>
+    .table {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .table th, .table td {
+      text-align: center;
+      vertical-align: middle;
+      padding: 12px 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .table th {
+      background-color: #4b5f83;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 14px;
+    }
+
+    .table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .table tr:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
+
+    .table td {
+      font-size: 14px;
+      color: #333333;
+    }
+
+    .table th:first-child, .table td:first-child {
+      border-top-left-radius: 10px;
+    }
+
+    .table th:last-child, .table td:last-child {
+      border-top-right-radius: 10px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      background-color: #4b5f83;
+      padding: 10px 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .navbar a.active, .navbar a:hover {
+      background-color: #0d23ec;
+      border-radius: 5px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
   <div class="navbar">
@@ -52,7 +140,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script>
-    const appointments = JSON.parse('<%= JSON.stringify(appointments) %>');
+    const appointments = JSON.parse('<%- JSON.stringify(appointments) %>');
 
     $(function() {
       $("#datepicker").datepicker({

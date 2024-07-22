@@ -24,9 +24,8 @@ app.use(session({
   secret: 'your_secret_key',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
+  store: MongoStore.create({ mongoUrl: uri })
 }));
-
 
 // Transporter for email
 const transporter = nodemailer.createTransport({
@@ -84,9 +83,9 @@ app.get('/admin_dashboard', (req, res) => {
   if (!req.session.user) {
     return res.redirect('/login');
   }
-  Appointment.find({ date: { $gte: new Date() } }, (err, appointments) => {
+  Appointment.find({}).sort({ date: 1 }).exec((err, appointments) => {
     if (err) {
-      console.log(err);
+      console.error('Error fetching appointments:', err);
       res.status(500).send('Error fetching appointments');
     } else {
       res.render('admin_dashboard', { user: req.session.user, appointments });
@@ -94,19 +93,23 @@ app.get('/admin_dashboard', (req, res) => {
   });
 });
 
+
 app.get('/admin_history', (req, res) => {
   if (!req.session.user) {
     return res.redirect('/login');
   }
-  Appointment.find({}, (err, appointments) => {
+  Appointment.find({ date: { $lt: new Date() } }).sort({ date: -1 }).exec((err, appointments) => {
     if (err) {
-      console.log(err);
+      console.error('Error fetching appointments:', err);
       res.status(500).send('Error fetching appointments');
     } else {
       res.render('admin_history', { user: req.session.user, appointments });
     }
   });
 });
+
+
+
 app.post('/delete_appointment', (req, res) => {
   if (!req.session.user) {
     return res.status(403).send('Forbidden');
@@ -179,5 +182,5 @@ app.post('/book', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server started on ports ${PORT}`);
+  console.log(`Server started on port ${PORT}`);
 });

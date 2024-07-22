@@ -19,11 +19,46 @@ h1 {
   width: 100%;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .table th, .table td {
   text-align: center;
   vertical-align: middle;
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.table th {
+  background-color: #4CAF50;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.table td {
+  font-size: 14px;
+  color: #333333;
+}
+
+.table th:first-child, .table td:first-child {
+  border-top-left-radius: 10px;
+}
+
+.table th:last-child, .table td:last-child {
+  border-top-right-radius: 10px;
 }
 
 .btn-danger {
