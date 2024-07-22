@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(session({
-  secret: '0ZbTAJ4T5YUkeduu',
+  secret: '2134545',
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: uri })
