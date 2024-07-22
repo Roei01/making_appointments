@@ -12,7 +12,7 @@
       margin-top: 20px;
       width: 100%;
       background-color: #ffffff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(248, 248, 248, 0.1);
       border-collapse: collapse;
       border-radius: 10px;
       overflow: hidden;
@@ -55,6 +55,75 @@
       border-top-right-radius: 10px;
     }
 
+    .ui-datepicker {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.2em 0.2em 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-family: Arial, sans-serif;
+    }
+
+    .ui-datepicker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0.5em 0;
+      background-color: #4b5f83;
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .ui-datepicker-prev, .ui-datepicker-next {
+      cursor: pointer;
+      color: #ffffff;
+    }
+
+    .ui-datepicker-title {
+      font-size: 1.2em;
+    }
+
+    .ui-datepicker-calendar {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.9em;
+    }
+
+    .ui-datepicker th {
+      color: #4b5f83;
+      text-transform: uppercase;
+      padding: 0.2em;
+    }
+
+    .ui-datepicker td {
+      padding: 0.5em;
+      text-align: center;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .ui-datepicker .ui-datepicker-current-day .ui-state-active {
+      background-color: #4b5f83;
+      color: #ffffff;
+      border-radius: 100%;
+    }
+
+    .ui-datepicker .ui-state-default {
+      background: #fff;
+      color: #333;
+    }
+
+    .ui-datepicker .ui-state-hover {
+      background: #f1f1f1;
+    }
+
+    .ui-datepicker .ui-datepicker-other-month {
+      color: #ccc;
+    }
+
     .navbar {
       display: flex;
       justify-content: space-around;
@@ -94,6 +163,12 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
     }
+
+    .datepicker-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -105,8 +180,11 @@
     <h1>Admin Dashboard - הזמנות עתידיות</h1>
     <p>Welcome, <%= user.username %></p>
 
-    <div id="upcoming" class="appointments-table">
+    <div class="datepicker-container">
       <div id="datepicker"></div>
+    </div>
+
+    <div id="upcoming" class="appointments-table">
       <table class="table table-bordered">
         <thead>
           <tr>
