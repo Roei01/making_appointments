@@ -1,32 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>Admin Dashboard - הזמנות עתידיות</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <link rel="stylesheet" href="/admin_styles.css">
 </head>
-<body class="main-body light-theme app sidebar-mini" style="background-color: white;">
-  <div class="container" style="margin-top: 50px;">
-    <h1>Admin Dashboard</h1>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Appointment Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% appointments.forEach(function(appointment) { %>
-          <tr>
-            <td><%= appointment.name %></td>
-            <td><%= appointment.email %></td>
-            <td><%= appointment.date.toLocaleString('he-IL') %></td>
-          </tr>
-        <% }); %>
-      </tbody>
-    </table>
+<body>
+  <div class="navbar">
+    <a href="/admin_dashboard" class="active">הזמנות עתידיות</a>
+    <a href="/admin_history" class="history-button">היסטוריית הזמנות</a>
   </div>
+  <div class="container">
+    <h1>Admin Dashboard - הזמנות עתידיות</h1>
+    <p>Welcome, <%= user.username %></p>
+
+    <div id="upcoming" class="appointments-table">
+      <div id="datepicker"></div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>שם</th>
+            <th>תאריך ושעה</th>
+            <th>אימייל</th>
+            <th>פעולות</th>
+          </tr>
+        </thead>
+        <tbody id="upcoming-appointments">
+          <% appointments.sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(function(appointment) { %>
+            <% if (new Date(appointment.date) >= new Date()) { %>
+              <tr data-date="<%= new Date(appointment.date).toISOString().split('T')[0] %>">
+                <td><%= appointment.name %></td>
+                <td><%= new Date(appointment.date).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' }) %></td>
+                <td><%= appointment.email %></td>
+                <td>
+                  <form action="/delete_appointment" method="POST" style="display:inline;">
+                    <input type="hidden" name="id" value="<%= appointment._id %>">
+                    <button type="submit" class="btn btn-danger">מחק</button>
+                  </form>
+                </td>
+              </tr>
+            <% } %>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+    const appointments = JSON.parse('<%= JSON.stringify(appointments) %>');
+
+    $(function() {
+      $("#datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        defaultDate: new Date(),
+        onSelect: function(dateText) {
+          const selectedDate = new Date(dateText).toISOString().split('T')[0];
+          const rows = document.querySelectorAll('#upcoming-appointments tr');
+          rows.forEach(row => {
+            if (row.getAttribute('data-date') === selectedDate) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        }
+      }).datepicker("setDate", new Date());
+      
+      const today = new Date().toISOString().split('T')[0];
+      const rows = document.querySelectorAll('#upcoming-appointments tr');
+      rows.forEach(row => {
+        if (row.getAttribute('data-date') === today) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>

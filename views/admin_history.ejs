@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - היסטוריית הזמנות</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/admin_styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <a href="/admin_dashboard">הזמנות עתידיות</a>
+    <a href="/admin_history" class="active">היסטוריית הזמנות</a>
+  </div>
+  <div class="container">
+    <h1>Admin Dashboard - היסטוריית הזמנות</h1>
+    <p>Welcome, <%= user.username %></p>
+
+    <div id="history" class="history-table">
+      <div class="form-group">
+        <label for="history-day">בחר יום:</label>
+        <input type="date" id="history-day" class="form-control" value="<%= new Date().toISOString().split('T')[0] %>">
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>שם</th>
+            <th>תאריך ושעה</th>
+            <th>אימייל</th>
+          </tr>
+        </thead>
+        <tbody id="history-appointments">
+          <% appointments.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(function(appointment) { %>
+            <% if (new Date(appointment.date) < new Date()) { %>
+              <tr data-date="<%= new Date(appointment.date).toISOString().split('T')[0] %>">
+                <td><%= appointment.name %></td>
+                <td><%= new Date(appointment.date).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' }) %></td>
+                <td><%= appointment.email %></td>
+              </tr>
+            <% } %>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    const appointments = JSON.parse('<%= JSON.stringify(appointments) %>');
+
+    document.getElementById('history-day').addEventListener('change', function() {
+      const selectedDate = new Date(this.value);
+      const historyAppointments = document.getElementById('history-appointments');
+      historyAppointments.innerHTML = '';
+
+      const filteredAppointments = appointments.filter(appointment => {
+        const appointmentDate = new Date(appointment.date);
+        return appointmentDate.toDateString() === selectedDate.toDateString() && appointmentDate < new Date();
+      });
+
+      filteredAppointments.forEach(appointment => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${appointment.name}</td>
+          <td>${new Date(appointment.date).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' })}</td>
+          <td>${appointment.email}</td>
+        `;
+        historyAppointments.appendChild(row);
+      });
+
+      if (filteredAppointments.length === 0) {
+        const noAppointmentsMessage = document.createElement('div');
+        noAppointmentsMessage.className = 'alert alert-info';
+        noAppointmentsMessage.textContent = 'לא נמצאו הזמנות להיום הנבחר.';
+        historyAppointments.appendChild(noAppointmentsMessage);
+      }
+    });
+
+    // Set the default filter to today for history appointments
+    document.getElementById('history-day').dispatchEvent(new Event('change'));
+  </script>
+</body>
+</html>

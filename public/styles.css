@@ -3,6 +3,44 @@ body {
   font-family: 'Noto Sans Hebrew', sans-serif;
 }
 
+/* Styles for admin login and dashboard */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: auto;
+  padding: 1em;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  margin-bottom: .5em;
+  color: #333333;
+  font-weight: bold;
+}
+
+form input {
+  margin-bottom: 1em;
+  padding: .5em;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px;
+}
+
+form button {
+  padding: 0.7em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
 .main-header {
   background-color: #343a40;
   color: white;
@@ -36,29 +74,32 @@ body {
 .header-text {
   text-align: center;
   color: black;
-  margin-top: 20px; /* או padding-top: 20px; בהתאם לצורך */
+  margin-top: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333333;
 }
 
 .header-text h1 {
   font-size: 4em;
   font-weight: bold;
-  margin-top: 20px; /* מרווח נוסף מעל הכותרת */
+  margin-top: 20px;
 }
-
 
 .header-text h4 {
   font-size: 2.5em;
   font-weight: bold;
-  margin-top: 50px; /* מרווח נוסף מעל הכותרת */
+  margin-top: 50px;
 }
 
 .header-text h5 {
   font-size: 1.2em;
   font-weight: normal;
-  color: gray; /* אפשר לשנות את הצבע במידת הצורך */
-  margin-top: 10px; /* מרווח נוסף מעל הכותרת */
+  color: gray;
+  margin-top: 10px;
 }
-
 
 .carousel .carousel-inner img {
   border-radius: 8px;
@@ -121,9 +162,9 @@ select.form-control {
   width: 120px;
   margin: 10px;
   padding: 15px;
-  background-color: #f4f7f6; /* צבע רקע דומה לרקע האתר */
-  color: black; /* צבע טקסט שחור */
-  border: 1px solid #ced4da; /* קו גבול עדין */
+  background-color: #f4f7f6;
+  color: black;
+  border: 1px solid #ced4da;
   border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
@@ -133,44 +174,40 @@ select.form-control {
 }
 
 #timeSlots button:hover {
-  background-color: #e2e6ea; /* צבע רקע כהה יותר בעת ריחוף */
+  background-color: #e2e6ea;
   transform: translateY(-3px);
 }
 
 #timeSlots button:focus {
   outline: none;
-  box-shadow: 0 0 5px #007bff; /* צל כחול בעת פוקוס */
+  box-shadow: 0 0 5px #007bff;
 }
 
-
-
-/* עיצוב כללי ל-breadcrumb */
 .custom-breadcrumb {
-  background-color: #f8f9fa; /* צבע רקע מותאם */
-  border-radius: 5px; /* פינות מעוגלות */
-  padding: 10px 15px; /* רווח פנימי */
-  list-style: none; /* ביטול נקודות רשימה */
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  padding: 10px 15px;
+  list-style: none;
   display: flex;
-  justify-content: center; /* מרכז את הפריטים בתוך ה-breadcrumb */
+  justify-content: center;
 }
 
-/* עיצוב לפריטים בתוך ה-breadcrumb */
 .custom-breadcrumb-item {
-  font-size: 2em; /* גודל טקסט */
-  color: #007bff; /* צבע טקסט מותאם */
-  margin: 0 5px; /* רווח בין הפריטים */
+  font-size: 2em;
+  color: #007bff;
+  margin: 0 5px;
 }
 
 .custom-breadcrumb-item.active {
-  font-weight: bold; /* משקל טקסט מודגש לפריטים פעילים */
+  font-weight: bold;
 }
 
 .custom-breadcrumb-item::before {
-  content: ''; /* ביטול החץ בין הפריטים */
+  content: '';
 }
 
 .custom-breadcrumb-item + .custom-breadcrumb-item::before {
-  content: '>'; /* הוספת חץ בין הפריטים */
-  color: #6c757d; /* צבע חץ מותאם */
-  margin: 0 5px; /* רווח בין החץ לטקסט */
+  content: '>';
+  color: #6c757d;
+  margin: 0 5px;
 }
