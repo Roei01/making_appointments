@@ -12,6 +12,10 @@ const app = express();
 
 // MongoDB URI and connection
 const uri = process.env.MONGODB_URI;
+if (!uri) {
+  throw new Error('MONGODB_URI is not defined in environment variables');
+}
+
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
@@ -21,11 +25,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(session({
-  secret: '2134545',
+  secret: process.env.SESSION_SECRET || 'default_secret_key', // בדוק אם SESSION_SECRET מוגדר
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: uri })
 }));
+
 
 // Transporter for email
 const transporter = nodemailer.createTransport({
