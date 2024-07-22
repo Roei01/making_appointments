@@ -14,7 +14,7 @@ jobs:
         ports:
           - 27017:27017
         options: >-
-          --health-cmd="mongo --eval 'db.runCommand({ ping: 1 })'"
+          --health-cmd="echo 'db.runCommand({ ping: 1 })' | mongo localhost:27017/test --quiet"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -30,6 +30,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Build the project
+        run: npm run build
 
       - name: Wait for MongoDB to be ready
         run: |
@@ -58,6 +61,4 @@ jobs:
         run: npm ci
 
       - name: Deploy to production
-        run: npm run deploy
-        env:
-          NODE_AUTH_TOKEN: ${https://api.render.com/deploy/srv-cqbt57rv2p9s738p4jj0?key=ow2quTPo-gI}
+        run: curl https://api.render.com/deploy/srv-cqbt57rv2p9s738p4jj0?key=ow2quTPo-gI
