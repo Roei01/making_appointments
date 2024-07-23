@@ -11,7 +11,7 @@ require('dotenv').config();
 const app = express();
 
 // MongoDB URI and connection
-const uri = "mongodb+srv://royinagar2:0ZbTAJ4T5YUkeduu@cluster0.cpfyu6i.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = MONGODB_URI;
 if (!uri) {
   throw new Error('MONGODB_URI is not defined in environment variables');
 }
@@ -23,7 +23,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.set('views', './public/views'); // הגדר את הנתיב החדש לתצוגות
+app.set('views', './public/views');
 app.set('view engine', 'ejs');
 app.use(session({
   secret: process.env.SESSION_SECRET || 'default_secret_key', // בדוק אם SESSION_SECRET מוגדר
@@ -37,8 +37,8 @@ app.use(session({
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: "royinagar2@gmail.com",
-    pass: "pryk uqde apyp kuwl"
+    user: EMAIL,
+    pass: EMAIL_PASSWORD
   }
 });
 
@@ -73,8 +73,8 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const adminUsername = "admin";
-  const adminPassword = "$2b$10$2WReuWxDlpM3cOD/L1R9Ze04tXW.huYEJC6xP2hlycLiA926WZgiS";
+  const adminUsername = ADMIN_USERNAME;
+  const adminPassword = ADMIN_PASSWORD;
   const isPasswordValid = await bcrypt.compare(password, adminPassword);
   if (username === adminUsername && isPasswordValid) {
     req.session.user = { username: 'admin' };
