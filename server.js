@@ -11,7 +11,7 @@ require('dotenv').config();
 const app = express();
 
 // MongoDB URI and connection
-const uri = MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 if (!uri) {
   throw new Error('MONGODB_URI is not defined in environment variables');
 }
@@ -23,6 +23,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use('/admin_history', express.static(path.join(__dirname, 'public/admin_history')));
 app.set('views', './public/views');
 app.set('view engine', 'ejs');
 app.use(session({
@@ -37,8 +38,8 @@ app.use(session({
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: EMAIL,
-    pass: EMAIL_PASSWORD
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD
   }
 });
 
@@ -73,8 +74,8 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const adminUsername = ADMIN_USERNAME;
-  const adminPassword = ADMIN_PASSWORD;
+  const adminUsername = process.env.ADMIN_USERNAME;
+  const adminPassword = process.env.ADMIN_PASSWORD;
   const isPasswordValid = await bcrypt.compare(password, adminPassword);
   if (username === adminUsername && isPasswordValid) {
     req.session.user = { username: 'admin' };
