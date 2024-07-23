@@ -23,6 +23,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.set('views', './public/views'); // הגדר את הנתיב החדש לתצוגות
 app.set('view engine', 'ejs');
 app.use(session({
   secret: process.env.SESSION_SECRET || 'default_secret_key', // בדוק אם SESSION_SECRET מוגדר
@@ -72,10 +73,9 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const adminUsername = admin;
-  const adminPassword = $2b$10$2WReuWxDlpM3cOD/L1R9Ze04tXW.huYEJC6xP2hlycLiA926WZgiS;
+  const adminUsername = "admin";
+  const adminPassword = "$2b$10$2WReuWxDlpM3cOD/L1R9Ze04tXW.huYEJC6xP2hlycLiA926WZgiS";
   const isPasswordValid = await bcrypt.compare(password, adminPassword);
-
   if (username === adminUsername && isPasswordValid) {
     req.session.user = { username: 'admin' };
     res.redirect('/admin_dashboard');
