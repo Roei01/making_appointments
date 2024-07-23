@@ -23,7 +23,6 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use('/admin_history', express.static(path.join(__dirname, 'public/admin_history')));
 app.set('views', './public/views');
 app.set('view engine', 'ejs');
 app.use(session({
