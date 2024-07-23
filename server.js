@@ -11,7 +11,7 @@ require('dotenv').config();
 const app = express();
 
 // MongoDB URI and connection
-const uri = "mongodb+srv://royinagar2:0ZbTAJ4T5YUkeduu@cluster0.cpfyu6i.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const uri = "mongodb+srv://royinagar2:0ZbTAJ4T5YUkeduu@cluster0.cpfyu6i.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 if (!uri) {
   throw new Error('MONGODB_URI is not defined in environment variables');
 }
