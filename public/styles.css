@@ -230,7 +230,7 @@ select.form-control {
   }
 
   #timeSlots button {
-    width: 25%; 
+    width: 30%; 
     margin: 5px; /* ריווח קטן מעל ומתחת לכפתור */
     font-size: 18px; /* גודל גופן קטן יותר */
     padding: 10px; /* כרית קטנה יותר */
