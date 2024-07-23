@@ -159,14 +159,14 @@ select.form-control {
 
 #timeSlots button {
   display: inline-block;
-  width: 120px;
+  width: 100px;
   margin: 10px;
   padding: 15px;
   background-color: #f4f7f6;
   color: black;
   border: 1px solid #ced4da;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
@@ -212,7 +212,6 @@ select.form-control {
   margin: 0 5px;
 }
 
-/* Mobile styles */
 @media (max-width: 768px) {
   .header-text h1 {
     font-size: 2.5em;
@@ -231,9 +230,9 @@ select.form-control {
   }
 
   #timeSlots button {
-    width: 100%; /* הכפתור יתפוס את כל רוחב המסך */
-    margin: 5px 0; /* ריווח קטן מעל ומתחת לכפתור */
-    font-size: 14px; /* גודל גופן קטן יותר */
+    width: 25%; 
+    margin: 5px; /* ריווח קטן מעל ומתחת לכפתור */
+    font-size: 18px; /* גודל גופן קטן יותר */
     padding: 10px; /* כרית קטנה יותר */
   }
 
@@ -250,4 +249,28 @@ select.form-control {
   .custom-breadcrumb-item {
     font-size: 1.2em;
   }
+
+  .main-header-left {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-header-left a {
+    margin: 5px;
+  }
+
+  .header-formsearch {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .main-header-left .main-logo {
+    position: absolute;
+    top: 15px;
+    right: 2px;
+    z-index: 10;
+    width: 20px; /* הקטנת הרוחב של הלוגו */
+    height: 20px; /* הקטנת הגובה של הלוגו */
+  }
+
 }

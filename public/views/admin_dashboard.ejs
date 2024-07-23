@@ -168,6 +168,47 @@
       justify-content: center;
       margin-bottom: 20px;
     }
+
+  
+  @media (max-width: 768px) {
+  .table {
+    display: flex;
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+  }
+
+  .table thead {
+    display: flex;
+    display: none;
+  }
+
+  .table tr {
+    display: flex;
+    display: block;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    text-align: right;
+  }
+
+  .table td:before {
+    display: flex;
+    content: attr(data-label);
+    flex: 1;
+    font-weight: bold;
+  }
+
+  .table td:last-child {
+    display: flex;
+    text-align: center;
+  }
+}
   </style>
 </head>
 <body>
@@ -197,10 +238,10 @@
           <% appointments.sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(function(appointment) { %>
             <% if (new Date(appointment.date) >= new Date()) { %>
               <tr data-date="<%= new Date(appointment.date).toISOString().split('T')[0] %>">
-                <td><%= appointment.name %></td>
-                <td><%= new Date(appointment.date).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' }) %></td>
-                <td><%= appointment.email %></td>
-                <td>
+                <td data-label="שם"><%= appointment.name %></td>
+                <td data-label="תאריך ושעה"><%= new Date(appointment.date).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' }) %></td>
+                <td data-label="אימייל"><%= appointment.email %></td>
+                <td data-label="פעולות">
                   <form action="/delete_appointment" method="POST" style="display:inline;">
                     <input type="hidden" name="id" value="<%= appointment._id %>">
                     <button type="submit" class="btn btn-danger">מחק</button>
