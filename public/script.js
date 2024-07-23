@@ -44,7 +44,7 @@ function loadTimeSlots(dayOffset = 0) {
         const button = document.createElement('button');
         button.className = 'btn btn-outline-dark btn-block time-slot show';
         button.textContent = new Date(slot).toLocaleString('he-IL', { timeStyle: 'short' });
-        button.onclick = () => window.location.href = `/confirm?time=${slot}`;
+        button.onclick = () => window.location.href = `confirm?time=${slot}`;
         timeSlotsDiv.appendChild(button);
       });
     })
