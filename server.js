@@ -36,8 +36,8 @@ app.use(session({
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.EMAIL_PASSWORD
+    user: "royinagar2@gmail.com",
+    pass: "pryk uqde apyp kuwl"
   }
 });
 
@@ -72,8 +72,8 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const adminUsername = process.env.ADMIN_USERNAME;
-  const adminPassword = process.env.ADMIN_PASSWORD;
+  const adminUsername = admin;
+  const adminPassword = $2b$10$2WReuWxDlpM3cOD/L1R9Ze04tXW.huYEJC6xP2hlycLiA926WZgiS;
   const isPasswordValid = await bcrypt.compare(password, adminPassword);
 
   if (username === adminUsername && isPasswordValid) {
@@ -166,7 +166,7 @@ app.post('/book', (req, res) => {
       console.log(err);
     } else {
       const mailOptions = {
-        from: process.env.EMAIL,
+        from: "royinagar2@gmail.com",
         to: req.body.email,
         subject: 'Appointment Confirmation',
         text: `Your appointment is confirmed for ${new Date(req.body.time).toLocaleString('he-IL', { dateStyle: 'full', timeStyle: 'short' })}`
