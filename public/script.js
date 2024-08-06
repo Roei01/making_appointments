@@ -50,7 +50,6 @@ function loadTimeSlots(dayOffset = 0) {
     })
     .catch(error => console.error('Error loading time slots:', error));
 }
-
 document.querySelector('.search-btn').addEventListener('click', function() {
   document.querySelector('.search').classList.toggle('active');
 });
@@ -64,3 +63,4 @@ document.querySelector('.search-bar').addEventListener('blur', function() {
     document.querySelector('.search').classList.remove('active');
   }
 });
+

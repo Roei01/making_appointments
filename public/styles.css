@@ -346,7 +346,9 @@ select.form-control {
   outline: none;
   font: 1em helvetica, sans-serif;
   letter-spacing: 0.05rem;
-  padding-left: 2rem;
+  padding-right: 3.2rem; /* הוסף מרווח פנימי מימין */
+  direction: ltr; /* קבע את כיוון הכתיבה משמאל לימין */
+
 }
 
 .search-btn {
@@ -377,3 +379,6 @@ select.form-control {
   opacity: 0;
   transform: translateX(200%);
 }
+
+
+
