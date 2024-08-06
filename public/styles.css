@@ -272,5 +272,108 @@ select.form-control {
     width: 20px; /* הקטנת הרוחב של הלוגו */
     height: 20px; /* הקטנת הגובה של הלוגו */
   }
+}
 
+/* אנימציות עבור האייקונים */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.icon {
+  width: 5.625rem;
+  height: 5.625rem;
+  background-color: #343a40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.icon:hover > img {
+  transform: scale(1.2);
+  color: #ff1f1f;
+}
+
+.icon:before {
+  background: var(--color);
+  content: "";
+  position: absolute;
+  width: 130%;
+  height: 130%;
+  left: -110%;
+  top: 80%;
+  transform: rotate(45deg);
+}
+
+.icon:hover:before {
+  animation: slide 0.7s forwards;
+}
+
+@keyframes slide {
+  50% {
+    left: 10%;
+    top: -40%;
+  }
+  100% {
+    left: -15%;
+    top: -15%;
+  }
+}
+
+/* עיצוב עבור אלמנט החיפוש */
+.search {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  transition: width 0.5s;
+}
+
+.search.active {
+  width: 400px;
+}
+
+.search-bar {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  border: 0.125rem solid black;
+  outline: none;
+  font: 1em helvetica, sans-serif;
+  letter-spacing: 0.05rem;
+  padding-left: 2rem;
+}
+
+.search-btn {
+  position: absolute;
+  right: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  background-color: black;
+  border: 0.1rem solid black;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.search-icon {
+  position: absolute;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.search-glass {
+  opacity: 1;
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.search.active .search-glass {
+  opacity: 0;
+  transform: translateX(200%);
 }
